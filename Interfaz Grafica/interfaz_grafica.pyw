@@ -1,33 +1,29 @@
-#Utilizamos la extencion .pyw para que cuando ejecutemos no nos abra la consola detras
-# Tambien denominadas GUI, Son Intermediarios entre el prograna y el Usuario
-#si estoy en linux puedo instalar tkinter.... $sudo apt-get install python3-tk
-#Estructura de una ventana en tkinter
-#tenemos una raiz ....luego un frame.... y luego widgets
+
+#--Label--
+#sintaxis:  variavlelabel=Label(contenedor,opciones)
+#opciones = https://docs.python.org/3/library/tkinter.ttk.html#label-options
+
+from tkinter import *
+
+root=Tk()
+miframe=Frame(root,width="1200", height="1400")
+miframe.pack()
+
+milabel=Label(miframe, text="Aqui va mi primer fucking texto")
+#milabel.pack()# si hacemos esto no va a respetar las medidas del frame y las va a adaptar al texto
+#si no queremos que eso ocurra en vez de empaquetar el label usamos el metodo place
+
+milabel.place(x="100", y="70")#ahora si respeta la medida del frame y coloca el texto en las coordenadas
+
+#si queremos abreviar cogigo y no crear variable label....
+
+miimagen=PhotoImage(file="/Volumes/PLATAFORMA-03/--SYNC--/Sync/PROGRAMACION/Aprendizaje-python/Interfaz Grafica/dr.png")#utilizamos la clase PhotoImage
+
+Label(miframe, text="Asi tambien se puede hacer").place(x=120, y=100)
+Label(miframe, text="Aca jugamos con los parametros", fg="red", font=("Arial Black", 19)).place(x=120, y=140)
+
+Label(miframe, image=miimagen).place(x=20, y=200)
 
 
-from tkinter import *   #Importo TODA la libreria tkinter
+root.mainloop()
 
-raiz=Tk()  #Construyo la raiz llamando a la clase Tk
-
-raiz.title("Primera Ventana")  #con el metodo title ponemos un titulo a la ventana(Raiz)
-raiz.iconbitmap("logo.ico")
-#raiz.geometry("750x350") #le damos una dimension de 750x350
-#raiz.resizable(1,0)  #0 seria false con esto le decimos que width es 0(false) y height es 0 (false) o sea que no puede redimencionarse ni en ancho ni en alto
-raiz.config(bg="black")
-
-miframe=Frame() #Ccontruyo un frame,
-miframe.pack(side="right",anchor="s")#empaqueto el frame... osea lo meto dentro de la raiz,  side indica donde se ancla el frame (Legal values are: 'left', 'right', 'top', 'bottom')anchor me da el punto cardinal
-miframe.config(bg="red")#le damos fdo rojo...notese que si ejecutamos no vemo aun el frame, esto es porque aun no le dimos tamaño, lo hacemos a continuacion
-miframe.config(width="650",height="350")#le damos tamaño a frame 
-
-miframe.config(bd=35)#le decimos tamaño de borde
-miframe.config(relief="groove")#le decimos tipo de borde
-miframe.config(cursor="hand2") 
-
-#-----Enlaces para ver:-----
-#https://docs.python.org/3/library/tk.html
-#https://docs.python.org/3/library/tkinter.html#setting-options
-
-
-
-raiz.mainloop()  #el metodo mainloop hace un bucle infinito debe estar siempre al final
