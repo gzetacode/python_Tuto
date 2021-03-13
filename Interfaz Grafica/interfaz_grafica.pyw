@@ -1,29 +1,44 @@
-
-#--Label--
-#sintaxis:  variavlelabel=Label(contenedor,opciones)
-#opciones = https://docs.python.org/3/library/tkinter.ttk.html#label-options
+#corresponde al video 45 
 
 from tkinter import *
 
-root=Tk()
-miframe=Frame(root,width="1200", height="1400")
+#vamos a incorporar un metodo grid o tabla para colocar elementos roww son las filas column son las columnas
+raiz=Tk()
+miframe=Frame(raiz,width=1200, height="600")
 miframe.pack()
 
-milabel=Label(miframe, text="Aqui va mi primer fucking texto")
-#milabel.pack()# si hacemos esto no va a respetar las medidas del frame y las va a adaptar al texto
-#si no queremos que eso ocurra en vez de empaquetar el label usamos el metodo place
+#---creamos los labels
+nombrelabel=Label(miframe, text="Nombre:")
+nombrelabel.grid(row=0, column=0, sticky="e", padx=10, pady=10)
 
-milabel.place(x="100", y="70")#ahora si respeta la medida del frame y coloca el texto en las coordenadas
+apellidolabel=Label(miframe, text="Apellido:")
+apellidolabel.grid(row=1, column=0, sticky="e", padx=10, pady=10)
 
-#si queremos abreviar cogigo y no crear variable label....
+direccionlabel=Label(miframe, text="Direccion de Oficina:")
+direccionlabel.grid(row=2, column=0, sticky="e", padx=10, pady=10)
 
-miimagen=PhotoImage(file="/Volumes/PLATAFORMA-03/--SYNC--/Sync/PROGRAMACION/Aprendizaje-python/Interfaz Grafica/dr.png")#utilizamos la clase PhotoImage
-
-Label(miframe, text="Asi tambien se puede hacer").place(x=120, y=100)
-Label(miframe, text="Aca jugamos con los parametros", fg="red", font=("Arial Black", 19)).place(x=120, y=140)
-
-Label(miframe, image=miimagen).place(x=20, y=200)
+passlabel=Label(miframe, text="Password:")
+passlabel.grid(row=3, column=0, sticky="e", padx=10, pady=10)
 
 
-root.mainloop()
+#creamos los Entry labels
+
+cuadronombre=Entry(miframe)
+cuadronombre.grid(row=0, column=1)
+cuadronombre.config(fg="red",justify="center") #aca le estoy diciendo que el texto que ingreso este en rojo y centredo
+
+cuadroapellido=Entry(miframe)
+cuadroapellido.grid(row=1, column=1)
+
+cuadrodireccion=Entry(miframe)
+cuadrodireccion.grid(row=2, column=1)
+
+cuadropass=Entry(miframe)
+cuadropass.grid(row=3, column=1)
+cuadropass.config(show="*") #aca le digo que lo que me muestra sean ******
+
+#sticky admite n-s-e-w (norte sur este y oeste) ademas ne se sw nw (nor este sud este etc) 
+#el pad (pading) nos da el espaciado alrededor dentro del contenedo ej: padx=10 nos dice que va a tener 10 pixel de espacio adelante y 10 atras
+
+raiz.mainloop()
 
