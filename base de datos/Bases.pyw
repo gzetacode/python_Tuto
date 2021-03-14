@@ -4,33 +4,21 @@ miconexion=sqlite3.connect("/Volumes/PLATAFORMA-03/--SYNC--/Sync/PROGRAMACION/Ap
 
 micursor=miconexion.cursor()
 
-micursor.execute('''
-    CREATE TABLE PRODUCTOS (
-    ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    NOMBRE_ARTICULOS VARCHAR(50) UNIQUE,
-    PRECIO INTEGER,
-    SECCION VARCHAR(20))
-''')
-#al agregar unique al campo nombre de articulo estamos indicando que es unico 
-# y no se puede repetir si ingresamos dos articulos con el mismo nombre da error
+#------Read------
+micursor.execute("SELECT * FROM PRODUCTOS WHERE SECCION='Deportes'")
+productos=micursor.fetchall()
+print(productos)
 
-variosproductos=[
-    ("Camiseta", 800, "Deportes"),
-    ("Botines", 7000, "Deportes"),
-    ("Jarron", 800, "Ceramica"),
-    ("Platos", 450, "Bazar"),
-    ("Yerba", 350, "Almacen")
-]
+#----UPDATE---------------
+micursor.execute("UPDATE PRODUCTOS SET PRECIO=1200 WHERE NOMBRE_ARTICULOS='Jarron'")
 
+#------Delete-----------------
 
-
-micursor.executemany("INSERT INTO PRODUCTOS VALUES (NULL,?,?,?)" , variosproductos)
-
-  
+micursor.execute("DELETE FROM PRODUCTOS WHERE NOMBRE_ARTICULOS='Platos'")
 
 
 miconexion.commit()
 
 
-
+ 
 miconexion.close()
