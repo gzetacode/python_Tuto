@@ -7,11 +7,12 @@ micursor=miconexion.cursor()
 micursor.execute('''
     CREATE TABLE PRODUCTOS (
     ID INTEGER PRIMARY KEY AUTOINCREMENT,
-    NOMBRE_ARTICULOS VARCHAR(50),
+    NOMBRE_ARTICULOS VARCHAR(50) UNIQUE,
     PRECIO INTEGER,
     SECCION VARCHAR(20))
 ''')
-
+#al agregar unique al campo nombre de articulo estamos indicando que es unico 
+# y no se puede repetir si ingresamos dos articulos con el mismo nombre da error
 
 variosproductos=[
     ("Camiseta", 800, "Deportes"),
