@@ -25,6 +25,36 @@ Radiobutton(root, text="Otras Opciones:", variable=varopcion, value=3, command=i
 etiqueta=Label(root)
 etiqueta.pack()
 
+playa=IntVar()
+montana=IntVar()
+rural=IntVar()
+
+def opciones_viajes():
+    opcionescojida=""
+    if(playa.get()==1):
+        opcionescojida+=" playa"
+    if(montana.get()==1):
+        opcionescojida+=" montaña"
+    if(rural.get()==1):
+        opcionescojida+=" turismo rural"
+
+    textofinal.config(text=opcionescojida)
+
+
+
+
+frame=Frame(root)
+frame.pack()
+
+Label(frame, text="Elije Destino/s:", width=80).pack()
+
+Checkbutton(frame,text="Playa",variable=playa, onvalue=1, offvalue=0, command=opciones_viajes).pack()
+Checkbutton(frame,text="Montaña",variable=montana, onvalue=1, offvalue=0, command=opciones_viajes).pack()
+Checkbutton(frame,text="Turismo Rural",variable=rural, onvalue=1, offvalue=0, command=opciones_viajes).pack()
+
+textofinal=Label(frame)
+textofinal.pack()
+
 
 
 root.mainloop()
