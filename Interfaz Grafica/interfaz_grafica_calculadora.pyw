@@ -5,6 +5,8 @@ raiz=Tk()
 miframe=Frame(raiz)
 miframe.pack()
 
+operacion="" #variable global inicializada en cadena vacia
+resultado=0
 #--------------Pantalla-------------
 
 numeropantalla=StringVar()
@@ -16,7 +18,28 @@ pantalla.config(background="black", fg="#1df707", justify="right")
 #------Pulsaciones teclado------------
 
 def numeropulsado(num):
-    numeropantalla.set(numeropantalla.get() + num) #numeropantalla.get() es igual a lo que hay en este momento en pantalla
+    global operacion
+    if operacion!="":
+        numeropantalla.set(num)
+        operacion=""
+    else:
+        numeropantalla.set(numeropantalla.get() + num) #numeropantalla.get() es igual a lo que hay en este momento en pantalla
+
+#--------Funcion Suma-----------
+
+def suma(num):
+    global operacion #aca le digo que tenga en cuenta que voy a operar con la variable global operacion
+    global resultado
+    resultado+=int(num) #esto es igual resultado=resultado+int(num)
+    operacion="suma"
+    numeropantalla.set(resultado)
+
+#-------funcion el resultado-------
+
+def el_resultado():
+    global resultado
+    numeropantalla.set(resultado+int(numeropantalla.get()))
+    resultado=0
 
 
 #-----------fila1-------------------
@@ -69,10 +92,10 @@ boton0.grid(row=5, column=1)
 botoncoma=Button(miframe, text=",", width=5)
 botoncoma.grid(row=5, column=2)
 
-botonigual=Button(miframe, text="=", width=5)
+botonigual=Button(miframe, text="=", width=5, command=lambda:el_resultado())
 botonigual.grid(row=5, column=3)
 
-botonsuma=Button(miframe, text="+", width=5)
+botonsuma=Button(miframe, text="+", width=5, command=lambda:suma(numeropantalla.get()))
 botonsuma.grid(row=5, column=4)
 
 
