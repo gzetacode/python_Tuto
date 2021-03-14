@@ -6,7 +6,7 @@ micursor=miconexion.cursor()
 
 micursor.execute('''
     CREATE TABLE PRODUCTOS (
-    CODIGO_ARTICULOS VARCHAR(4) PRIMARY KEY,
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
     NOMBRE_ARTICULOS VARCHAR(50),
     PRECIO INTEGER,
     SECCION VARCHAR(20))
@@ -14,16 +14,16 @@ micursor.execute('''
 
 
 variosproductos=[
-    ("AR01","Camiseta", 800, "Deportes"),
-    ("AR02","Botines", 7000, "Deportes"),
-    ("AR03","Jarron", 800, "Ceramica"),
-    ("AR04","Platos", 450, "Bazar"),
-    ("AR05","Yerba", 350, "Almacen")
+    ("Camiseta", 800, "Deportes"),
+    ("Botines", 7000, "Deportes"),
+    ("Jarron", 800, "Ceramica"),
+    ("Platos", 450, "Bazar"),
+    ("Yerba", 350, "Almacen")
 ]
 
 
 
-micursor.executemany("INSERT INTO PRODUCTOS VALUES (?,?,?,?)" , variosproductos)
+micursor.executemany("INSERT INTO PRODUCTOS VALUES (NULL,?,?,?)" , variosproductos)
 
   
 
