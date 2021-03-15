@@ -2,14 +2,44 @@ from tkinter import *
 from tkinter import messagebox
 import sqlite3
 
+
+#-----Funciones-------
+
+def coneccionBBDD():
+    miconeccion=sqlite3.connect("/Volumes/PLATAFORMA-03/--SYNC--/Sync/PROGRAMACION/Aprendizaje-python/menu CRUD/Usuarios.db")
+    micursor=miconeccion.cursor()
+
+    try:
+        micursor.execute('''
+        CREATE TABLE DATOSUSUARIOS (
+        ID INTEGER PRIMARY KEY AUTOINCREMENT,
+        NOMBRE_USUARIO VARCHAR(50),
+        APELLIDO VARCHAR(50),
+        EMAIL VARCHAR(50),
+        CUIT INTEGER(50) UNIQUE,
+        TELEFONO VARCHAR(25),
+        PASSWORD VARCHAR(50),
+        COMENTARIOS VARCHAR(200)
+        )   
+        ''')
+        messagebox.showinfo("BBDD", "BBDD Creada con exito")
+
+    except:
+        messagebox.showwarning("Atencion!!", "BBDD ya existe!!!!")
+
+def saliraplicacion():
+    valor=messagebox.askquestion("salir", "Deseas salir de la Aplicacion?")
+    if valor=="yes":
+        root.destroy()
+
 root=Tk()
 
 barramenu=Menu(root)
 root.config(menu=barramenu, width=300, height=600)
 
 bbddmenu=Menu(barramenu, tearoff=0)
-bbddmenu.add_command(label="Conectar")
-bbddmenu.add_command(label="Salir")
+bbddmenu.add_command(label="Conectar", command=coneccionBBDD)
+bbddmenu.add_command(label="Salir", command=saliraplicacion)
 
 borrarmenu=Menu(barramenu, tearoff=0)
 borrarmenu.add_command(label="Borrar Campos")
