@@ -99,7 +99,14 @@ def actualizar():
     limpiarcampos()
     messagebox.showinfo("BBDD", "Registro Actualizado con exito")
 
+def eliminar():
+    miconeccion=sqlite3.connect("/Volumes/PLATAFORMA-03/--SYNC--/Sync/PROGRAMACION/Aprendizaje-python/menu CRUD/Usuarios.db")
+    micursor=miconeccion.cursor()
 
+    micursor.execute("DELETE FROM DATOSUSUARIOS WHERE ID=" + miid.get())
+
+    miconeccion.commit()
+    messagebox.showinfo("BBDD", "Registro borrardo con Exito")
 
 
 
@@ -120,7 +127,7 @@ crudmenu=Menu(barramenu, tearoff=0)
 crudmenu.add_command(label="Crear", command=crear)
 crudmenu.add_command(label="Leer", command=leer)
 crudmenu.add_command(label="Actualizar", command=actualizar)
-crudmenu.add_command(label="Borrar")
+crudmenu.add_command(label="Borrar", command=eliminar)
 
 ayudamenu=Menu(barramenu, tearoff=0)
 ayudamenu.add_command(label="Licencia")
@@ -222,7 +229,7 @@ botonleer.grid(row=1, column=1, sticky="e", padx=10, pady=10)
 botonactualizar=Button(miframe2, text="Update", comman=actualizar)
 botonactualizar.grid(row=1, column=2, sticky="e", padx=10, pady=10)
 
-botonborrar=Button(miframe2, text="Delete")
+botonborrar=Button(miframe2, text="Delete", command=eliminar)
 botonborrar.grid(row=1, column=3, sticky="e", padx=10, pady=10)
 
 root.mainloop()
