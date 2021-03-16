@@ -82,7 +82,22 @@ def leer():
     
     miconeccion.commit()
 
+def actualizar():
+    miconeccion=sqlite3.connect("/Volumes/PLATAFORMA-03/--SYNC--/Sync/PROGRAMACION/Aprendizaje-python/menu CRUD/Usuarios.db")
+    micursor=miconeccion.cursor()
 
+    micursor.execute("UPDATE DATOSUSUARIOS SET NOMBRE_USUARIO='" + minombre.get() +
+        "', APELLIDO='" + miapellido.get() +
+        "', EMPRESA='" + miempresa.get() +
+        "', EMAIL='" + miemail.get() +
+        "', CUIT='" + micuit.get() +
+        "', TELEFONO='" + mitelefono.get() +
+        "', PASSWORD='" + mipass.get() +
+        "', COMENTARIOS='" + textocomentario.get("1.0", END) +
+        "' WHERE ID=" + miid.get())
+    miconeccion.commit()
+    limpiarcampos()
+    messagebox.showinfo("BBDD", "Registro Actualizado con exito")
 
 
 
@@ -104,7 +119,7 @@ borrarmenu.add_command(label="Borrar Campos", command=limpiarcampos)
 crudmenu=Menu(barramenu, tearoff=0)
 crudmenu.add_command(label="Crear", command=crear)
 crudmenu.add_command(label="Leer", command=leer)
-crudmenu.add_command(label="Actualizar")
+crudmenu.add_command(label="Actualizar", command=actualizar)
 crudmenu.add_command(label="Borrar")
 
 ayudamenu=Menu(barramenu, tearoff=0)
@@ -204,7 +219,7 @@ botoncrear.grid(row=1, column=0, sticky="e", padx=10, pady=10)
 botonleer=Button(miframe2, text="read", command=leer)
 botonleer.grid(row=1, column=1, sticky="e", padx=10, pady=10)
 
-botonactualizar=Button(miframe2, text="Update")
+botonactualizar=Button(miframe2, text="Update", comman=actualizar)
 botonactualizar.grid(row=1, column=2, sticky="e", padx=10, pady=10)
 
 botonborrar=Button(miframe2, text="Delete")
