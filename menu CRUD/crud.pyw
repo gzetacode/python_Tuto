@@ -49,14 +49,19 @@ def crear():
     miconeccion=sqlite3.connect("/Volumes/PLATAFORMA-03/--SYNC--/Sync/PROGRAMACION/Aprendizaje-python/menu CRUD/Usuarios.db")
     micursor=miconeccion.cursor()
 
-    micursor.execute("INSERT INTO DATOSUSUARIOS VALUES (NULL, '" + minombre.get() +
+    """micursor.execute("INSERT INTO DATOSUSUARIOS VALUES (NULL, '" + minombre.get() +
         "','" + miapellido.get() +
         "','" + miempresa.get() +
         "','" + miemail.get() +
         "','" + micuit.get() +
         "','" + mitelefono.get() +
         "','" + mipass.get() +
-        "','" + textocomentario.get("1.0", END) + "')")
+        "','" + textocomentario.get("1.0", END) + "')")"""
+
+    datos= minombre.get(),miapellido.get(),miempresa.get(),miemail.get(),micuit.get(),mitelefono.get(),mipass.get(),textocomentario.get("1.0", END) 
+
+    micursor.execute("INSERT INTO DATOSUSUARIOs VALUES(NULL,?,?,?,?,?,?,?,?)", (datos))
+
     miconeccion.commit()
     limpiarcampos()
     messagebox.showinfo("BBDD", "Registro insertado con exito")
@@ -86,7 +91,7 @@ def actualizar():
     miconeccion=sqlite3.connect("/Volumes/PLATAFORMA-03/--SYNC--/Sync/PROGRAMACION/Aprendizaje-python/menu CRUD/Usuarios.db")
     micursor=miconeccion.cursor()
 
-    micursor.execute("UPDATE DATOSUSUARIOS SET NOMBRE_USUARIO='" + minombre.get() +
+    """micursor.execute("UPDATE DATOSUSUARIOS SET NOMBRE_USUARIO='" + minombre.get() +
         "', APELLIDO='" + miapellido.get() +
         "', EMPRESA='" + miempresa.get() +
         "', EMAIL='" + miemail.get() +
@@ -94,7 +99,14 @@ def actualizar():
         "', TELEFONO='" + mitelefono.get() +
         "', PASSWORD='" + mipass.get() +
         "', COMENTARIOS='" + textocomentario.get("1.0", END) +
-        "' WHERE ID=" + miid.get())
+        "' WHERE ID=" + miid.get())"""
+
+    datos= minombre.get(),miapellido.get(),miempresa.get(),miemail.get(),micuit.get(),mitelefono.get(),mipass.get(),textocomentario.get("1.0", END) 
+
+    micursor.execute("UPDATE DATOSUSUARIOS SET NOMBRE_USUARIO=?,APELLIDO=?,EMPRESA=?,EMAIL=?,CUIT=?,TELEFONO=?,PASSWORD=?,COMENTARIOS=? " +
+    "WHERE ID=" + miid.get(), (datos))
+
+
     miconeccion.commit()
     limpiarcampos()
     messagebox.showinfo("BBDD", "Registro Actualizado con exito")
