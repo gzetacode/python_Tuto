@@ -15,7 +15,7 @@ def coneccionBBDD():
         ID INTEGER PRIMARY KEY AUTOINCREMENT,
         NOMBRE_USUARIO VARCHAR(50),
         APELLIDO VARCHAR(50),
-        EMPRESA VARCAR(50),
+        EMPRESA VARCAR(50)UNIQUE,
         EMAIL VARCHAR(50),
         CUIT INTEGER(50) UNIQUE,
         TELEFONO VARCHAR(25),
@@ -61,6 +61,34 @@ def crear():
     limpiarcampos()
     messagebox.showinfo("BBDD", "Registro insertado con exito")
 
+def leer():
+    miconeccion=sqlite3.connect("/Volumes/PLATAFORMA-03/--SYNC--/Sync/PROGRAMACION/Aprendizaje-python/menu CRUD/Usuarios.db")
+    micursor=miconeccion.cursor()
+
+    micursor.execute("SELECT * FROM DATOSUSUARIOS WHERE EMPRESA=" + "'" + miempresa.get() + "'")
+    elusuario=micursor.fetchall()
+    
+    for usuario in elusuario:
+        miid.set(usuario[0])
+        minombre.set(usuario[1])
+        miapellido.set(usuario[2])
+        miempresa.set(usuario[3])
+        miemail.set(usuario[4])
+        micuit.set(usuario[5])
+        mitelefono.set(usuario[6])
+        mipass.set(usuario[7])
+        textocomentario.insert(1.0, usuario[8])
+        
+    
+    miconeccion.commit()
+
+
+
+
+
+
+
+
 
 
 barramenu=Menu(root)
@@ -75,7 +103,7 @@ borrarmenu.add_command(label="Borrar Campos", command=limpiarcampos)
 
 crudmenu=Menu(barramenu, tearoff=0)
 crudmenu.add_command(label="Crear", command=crear)
-crudmenu.add_command(label="Leer")
+crudmenu.add_command(label="Leer", command=leer)
 crudmenu.add_command(label="Actualizar")
 crudmenu.add_command(label="Borrar")
 
@@ -173,7 +201,7 @@ miframe2.pack()
 botoncrear=Button(miframe2, text="Create", command=crear)
 botoncrear.grid(row=1, column=0, sticky="e", padx=10, pady=10)
 
-botonleer=Button(miframe2, text="read")
+botonleer=Button(miframe2, text="read", command=leer)
 botonleer.grid(row=1, column=1, sticky="e", padx=10, pady=10)
 
 botonactualizar=Button(miframe2, text="Update")
